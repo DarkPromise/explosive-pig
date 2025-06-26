@@ -1,0 +1,12 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.autoSave": "onFocusChange",
+  "files.autoSaveWhenNoErrors": true,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.format": "always",
+    "source.fixAll.eslint": "always"
+  },
+  "prettier.singleQuote": false,
+  "prettier.tabWidth": 2
+}
