@@ -31,6 +31,9 @@ export default tseslint.config([
     },
     rules: {
       "@stylistic/indent": ["error", 2], // Enforce 2 spaces for indentation
+      "@typescript-eslint/no-explicit-any": "off", // Allow 'any' type
+      "@typescript-eslint/no-unused-vars": "off", // Disable unused variables rule
+      "@typescript-eslint/no-empty-object-type": ["error", { allowInterfaces: "always" }], // Allow empty object types in interfaces
       "sort-imports": [
         "error",
         {

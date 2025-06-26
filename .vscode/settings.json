@@ -8,5 +8,8 @@
     "source.fixAll.eslint": "always"
   },
   "prettier.singleQuote": false,
-  "prettier.tabWidth": 2
+  "prettier.tabWidth": 2,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
 }
