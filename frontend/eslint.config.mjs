@@ -21,7 +21,7 @@ export default tseslint.config([
       ecmaVersion: 2020,
       globals: globals.browser,
       parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        project: ['./tsconfig.json'],
         tsconfigRootDir: import.meta.dirname,
       }
     },
@@ -84,7 +84,7 @@ export default tseslint.config([
       "import/resolver": {
         typescript: {
           alwaysTryTypes: true, // Always try to resolve types
-          project: ['./tsconfig.node.json', './tsconfig.app.json'], // Specify the project files
+          project: ['./tsconfig.json'], // Specify the project files
         },
       },
     },

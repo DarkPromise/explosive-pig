@@ -1,0 +1,21 @@
+{
+    "React Component": {
+        "scope": "javascript,typescript,typescriptreact",
+        "prefix": "rc",
+        "body": [
+            "'use client';",
+            "import React, { useEffect, useState, useTransition } from \"react\";",
+            "",
+            "export interface ${1:functionName}Props {}",
+            "",
+            "export const ${1:functionName} = (props: ${1:functionName}Props) => {",
+            "    return (",
+            "        <>",
+            "        </>",
+            "    );",
+            "}",
+            "",
+            "export default ${1:functionName};",
+        ],
+    }
+}

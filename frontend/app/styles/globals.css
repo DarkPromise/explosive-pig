@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+#root {
+  isolation: isolate;
+}
+
+@layer base {
+  body {
+    @apply bg-[#f7f7f7];
+  }
+
+  h2 {
+    @apply text-2xl font-extrabold leading-9;
+  }
+
+  h3 {
+    @apply text-lg font-extrabold leading-[26px];
+  }
+}
+
+@theme {
+  /** Font Family */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /** Colors */
+  --color-primary: #135BB4;
+  --color-secondary: #333;
+}
