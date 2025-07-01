@@ -1,8 +1,8 @@
 import { Router } from "express";
-import sequelize from 'src/db';
-import Class from 'src/models/class';
-import Teacher from 'src/models/teacher';
-import { ClassSchema } from '~/shared/types/types';
+import sequelize from '../../db';
+import Class from '../../models/class';
+import Teacher from '../../models/teacher';
+import { ClassSchema } from '../../../../shared/types/types';
 
 const router = Router();
 

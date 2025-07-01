@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "react-router dev",
     "build": "react-router build",
-    "start": "react-router serve .build/server/index.js"
+    "start": "cross-env PORT=5173 react-router-serve build/server/index.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",

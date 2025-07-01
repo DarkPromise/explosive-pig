@@ -5,7 +5,7 @@ const useClasses = () => {
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["get-classes"],
     queryFn: async () => {
-      return await fetch("/api/classes", {
+      return await fetch(import.meta.env.VITE_BACKEND_URL+"/api/classes", {
         method: "GET"
       }).then((res) => {
         if(!res.ok) {

@@ -36,7 +36,7 @@ export const TeachersForm = (props: TeachersFormProps) => {
 
   const handleOnSubmit = async (data: any) => {
     setIsFormPending(true);
-    await fetch("/api/teachers", {
+    await fetch(import.meta.env.VITE_BACKEND_URL+"/api/teachers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

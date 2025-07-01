@@ -1,6 +1,6 @@
 import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional } from "sequelize";
 import sequelize from "../db";
-import { classSubject } from '~/shared/types/types';
+import { classSubject } from '../../../shared/types/types';
 
 class Teacher extends Model<
   InferAttributes<Teacher>,

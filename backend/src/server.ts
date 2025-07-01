@@ -7,6 +7,7 @@ import "dotenv/config";
 import teachersRouter from "./api/teachers";
 import classesRouter from "./api/classes";
 import sequelize from './db';
+import cors from "cors";
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -15,6 +16,14 @@ const port = process.env.PORT || 3000
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+// Enable CORS for all routes
+// If using production, it should be configured to allow only specific origins
+app.use(cors({
+  origin: "*", // Allow all origins
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allow specific methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
+}));
 
 // Parent Router for API routes
 const apiRouter = express.Router();

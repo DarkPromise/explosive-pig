@@ -5,7 +5,7 @@ const useTeachers = () => {
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["get-teachers"],
     queryFn: async () => {
-      return await fetch("/api/teachers", {
+      return await fetch(import.meta.env.VITE_BACKEND_URL+"/api/teachers", {
         method: "GET"
       }).then((res) => {
         if (!res.ok) {

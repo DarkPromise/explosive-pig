@@ -1,7 +1,7 @@
 
 import { Router } from "express";
-import Teacher from 'src/models/teacher';
-import { TeacherSchema } from '~/shared/types/types';
+import Teacher from "../../models/teacher"
+import { TeacherSchema } from "../../../../shared/types/types";
 
 const router = Router();
 

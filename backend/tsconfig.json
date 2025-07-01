@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "rootDirs": ["."],
     "module": "commonjs",
     "target": "ES2020",
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
-
-    /** Paths */
+    "rootDirs": ["."],
     "baseUrl": ".",
     "paths": {
+      "~/*": ["./src/*"],
       "~/shared/*": ["../shared/*"]
-    },
+    }
   },
-  "include": ["**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "**/*",
+  ]
 }

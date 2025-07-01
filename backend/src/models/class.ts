@@ -7,7 +7,7 @@ import
     CreationOptional,
   } from "sequelize";
 import sequelize from "../db";
-import { classLevel, classLevels, Teacher } from "~/shared/types/types";
+import { classLevel, classLevels, Teacher } from "../../../shared/types/types";
 
 class Class extends Model<
   InferAttributes<Class>,
