@@ -8,6 +8,7 @@
 - [Backend Setup](#backend-setup)
 - [Database Setup](#database-setup)
 - [Running the Application (localhost)](#running-the-application-localhost)
+- [API Endpoints](#api-endpoints)
 - [Assumptions & Suggestions](#assumptions--suggestions)
 
 ## Prerequisites
@@ -123,13 +124,20 @@ npm run start
 
 The application will be available at http://localhost:5173, and the backend API will be available at http://localhost:3000/.
 
+## API Endpoints
+The backend API provides the following endpoints:
+- `GET /api/teachers`: Retrieve all teachers
+- `POST /api/teachers`: Create a new teacher
+- `GET /api/classes`: Retrieve all classes
+- `POST /api/classes`: Create a new class
+
 ## Assumptions & Suggestions
 For this assignment, I only followed the requirements as outlined in the gist.
 </br>I have included certain files that I used in my day to day work, such as the .vscode folder with settings I commonly use.
 
 For what can be improved in this assignment, I would do the following:
 - Better UI/UX for the frontend, such as having proper theming for the application. (I have tried to match the UI as closely as possible, even with 1 or 2px differences)
-- Implementing full CRUD functionality for both `Class` and `Teacher`. (The current implementation only has Create and Read functionalities)
+- Implementing full API CRUD functionality for both `Class` and `Teacher`. (The current implementation only has Create and Read functionalities)
 - Implementing a more robust error handling mechanism in the backend. (Instead of just 200, 201, etc)
 - Adding tests for both the frontend and backend. (This was optional, and I did not have time to implement it)
 - Better structuring of project files
