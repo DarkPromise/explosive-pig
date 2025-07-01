@@ -26,7 +26,7 @@ Before you begin, ensure you have the following installed on your system:
 1. Clone the repository:
 
 ```bash
-https://github.com/DarkPromise/explosive-pig.git
+git clone https://github.com/DarkPromise/explosive-pig.git
 ```
 
 2. Create .env file in the **frontend**, **backend** and **database** directories. You may use the provided `.env.example` files as a reference.
