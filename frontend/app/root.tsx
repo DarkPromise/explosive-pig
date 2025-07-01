@@ -13,6 +13,7 @@ import
 import type { Route } from "./+types/root";
 import "./styles/globals.css";
 import Header from './components/header/Header';
+import { Toaster } from './components/ui/sonner';
 
 
 export const links: Route.LinksFunction = () => [
@@ -41,6 +42,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <main className="flex flex-col min-h-screen">
           <Header/>
           {children}
+          <Toaster/>
         </main>
         <ScrollRestoration />
         <Scripts />

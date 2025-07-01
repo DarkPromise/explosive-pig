@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
         "contactNumber"
       ],
     });
-    res.json({ data: teachers});
+    res.status(200).json({ data: teachers});
   }
   catch(error) {
     console.error("[TeachersAPI] Error fetching teachers:", error);

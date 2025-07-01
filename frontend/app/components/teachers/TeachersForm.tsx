@@ -2,9 +2,10 @@
 import { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from 'clsx';
-import { Loader2Icon } from 'lucide-react';
+import { Loader2Icon, LucideCircleAlert } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router';
+import { useNavigate } from 'react-router';
+import { toast } from 'sonner';
 import { z } from "zod";
 import { classSubjects, TeacherSchema } from '~/shared/types/types';
 import { Button } from '../ui/button';
@@ -15,6 +16,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 export interface TeachersFormProps {}
 
 export const TeachersForm = (props: TeachersFormProps) => {
+  /** Navigation */
+  const navigate = useNavigate();
+  
   /** States */
   const [isFormPending, setIsFormPending] = useState(false);
   
@@ -40,9 +44,23 @@ export const TeachersForm = (props: TeachersFormProps) => {
       body: JSON.stringify(data),
     }).then((res) => {
       if(res.ok) {
-        //form.reset();
+        form.reset();
+        navigate(-1);
       }
       else {
+        console.error("[TeachersForm] Error submitting form:", res.status, res.statusText);
+        toast.error(
+          <div className="pl-1 text-sm font-medium">
+            {res.status === 409 ?
+              "A teacher with this email already exists."
+              :
+              "An error occurred while submitting the form. Please try again later."
+            }
+          </div>,
+          {
+            icon: <LucideCircleAlert className="text-red-500" />,
+          }
+        );
         // Maybe show an error message...
       }
       setIsFormPending(false);
@@ -139,11 +157,15 @@ export const TeachersForm = (props: TeachersFormProps) => {
         </div>
         {/** Buttons */}
         <div className="flex flex-row items-center justify-end gap-4">
-          <Button variant={"outline"} asChild>
+          {/* <Button variant={"outline"} asChild>
             <Link to="/teachers">
               <img className="h-4 w-4" src="/arrow-left.svg"/>
               Back
             </Link>
+          </Button> */}
+          <Button variant={"outline"} onClick={()=>navigate(-1)} type="button">
+            <img className="h-4 w-4" src="/arrow-left.svg"/>
+            Back
           </Button>
           <Button type="submit">
             {isFormPending ? 

@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
         ]
       ],
     });
-    res.json({ data: classes });
+    res.status(200).json({ data: classes });
   }
   catch(error) {
     console.error("[ClassesAPI] Error fetching classes:", error);
