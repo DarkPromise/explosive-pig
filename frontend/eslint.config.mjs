@@ -75,7 +75,8 @@ export default tseslint.config([
             caseInsensitive: true, // ignore case when sorting
           },
         },
-      ]
+      ],
+      "react-refresh/only-export-components": "off", // Disable the rule that requires components to be exported
     },
     settings: {
       "import/parsers": {

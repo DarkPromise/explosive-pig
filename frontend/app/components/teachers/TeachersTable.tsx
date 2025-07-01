@@ -3,40 +3,45 @@
 import { type ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import clsx from 'clsx';
 import { Link } from 'react-router';
-import type { Class } from '~/shared/types/types';
+import type { Teacher } from '~/shared/types/types';
 import { Button } from '../ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 
-const columns: ColumnDef<Class>[] = [
+
+const columns: ColumnDef<Teacher>[] = [
   {
     accessorKey: "id",
     header: "#",
   },
   {
-    accessorKey: "level",
-    header: "Class Level",
-  },
-  {
     accessorKey: "name",
-    header: "Class Name",
+    header: "Name",
   },
   {
-    accessorKey: "formTeacher.name",
-    header: "Form Teacher",
+    accessorKey: "subject",
+    header: "Subject",
+  },
+  {
+    accessorKey: "email",
+    header: "Email",
+  },
+  {
+    accessorKey: "contactNumber",
+    header: "Work Contact",
   }
 ];
 
-export interface ClassTableProps {
-  classes: Class[];
-  isClassesPending: boolean;
+export interface TeachersTableProps {
+  teachers: Teacher[];
+  isTeachersPending: boolean;
 }
 
-export const ClassTable = (props: ClassTableProps) => {
-  const { classes, isClassesPending } = props;
+export const TeachersTable = (props: TeachersTableProps) => {
+  const { isTeachersPending, teachers } = props;
 
   /** Table */
   const table = useReactTable({
-    data: classes,
+    data: teachers,
     columns,
     getCoreRowModel: getCoreRowModel()
   })
@@ -45,15 +50,15 @@ export const ClassTable = (props: ClassTableProps) => {
     <div className={
       clsx(
         "flex flex-col bg-white rounded-lg shadow-lg p-8",
-        !(classes?.length > 0) && "grow",
+        !(teachers?.length > 0) && "grow",
       )
     }>
-      {isClassesPending ?
+      {isTeachersPending ?
         <div className="flex flex-col grow items-center justify-center gap-6 min-h-1/2">
-          <h3 className="text-secondary">Loading classes...</h3>
+          <h3 className="text-secondary">Loading teachers...</h3>
         </div>
         :
-        classes.length > 0 ?
+        teachers.length > 0 ?
           <Table>
             <TableHeader className="bg-background">
               {table.getHeaderGroups().map(headerGroup => (
@@ -87,12 +92,12 @@ export const ClassTable = (props: ClassTableProps) => {
           :
           <div className="flex flex-col grow items-center justify-center gap-6 min-h-1/2">
             <h3 className="text-secondary">
-              There are no existing classes yet.
+              There are no existing teachers yet.
             </h3>
             <Button asChild>
               <Link to="add" className="text-white">
                 <img className="h-4 w-4" src="/plus.svg"/>
-                Add Class
+                Add Teacher
               </Link>
             </Button>
           </div>
@@ -101,4 +106,4 @@ export const ClassTable = (props: ClassTableProps) => {
   )
 }
 
-export default ClassTable;
+export default TeachersTable;

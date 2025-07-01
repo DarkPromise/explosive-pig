@@ -1,41 +1,38 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from 'clsx';
 import { Loader2Icon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 import { z } from "zod";
-import { classLevels, ClassSchema } from '~/shared/types/types';
-import useTeachers from "~/components/teachers/hooks/useTeachers";
+import { classSubjects, TeacherSchema } from '~/shared/types/types';
 import { Button } from '../ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form';
 import { Input } from '../ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
-export interface ClassFormProps {}
+export interface TeachersFormProps {}
 
-export const ClassForm = (props: ClassFormProps) => {
+export const TeachersForm = (props: TeachersFormProps) => {
   /** States */
   const [isFormPending, setIsFormPending] = useState(false);
-
-  /** Fetch teachers */
-  const { isTeachersPending, error, teachers, refetch } = useTeachers();
-
+  
   /** Form */
-  const form = useForm<z.infer<typeof ClassSchema>>({
-    resolver: zodResolver(ClassSchema),
+  const form = useForm<z.infer<typeof TeacherSchema>>({
+    resolver: zodResolver(TeacherSchema),
     defaultValues: {
-      level: "", 
       name: "",
-      teacherEmail: "",
+      subject: "",
+      email: "",
+      contactNumber: "",
     },
     mode: "onChange",
   })
 
   const handleOnSubmit = async (data: any) => {
     setIsFormPending(true);
-    await fetch("/api/classes", {
+    await fetch("/api/teachers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,31 +46,46 @@ export const ClassForm = (props: ClassFormProps) => {
         // Maybe show an error message...
       }
       setIsFormPending(false);
-    }).catch((error) => {
-      console.error("[ClassForm] Error submitting form:", error);
-      setIsFormPending(false);
-    });
+    })
   }
 
   return (
     <Form {...form}>
       <form className="flex flex-col grow gap-6" onSubmit={form.handleSubmit(handleOnSubmit)}>
         <div className="flex flex-col bg-white rounded-lg shadow-lg p-6 gap-6">
-          {/** Class Level (dropdown) */}
+          {/** Name (textfield) */}
           <FormField
             control={form.control}
-            name="level"
+            name="name"
             render={({field, fieldState})=>(
               <FormItem>
-                <FormLabel>Class Level</FormLabel>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input className="w-[464px]" placeholder="Name" {...field}/>
+                </FormControl>
+                {fieldState.error && (
+                  <p className={clsx("text-red-500 text-sm relative -top-1.5", fieldState.error.message ? "block" : "hidden")}>
+                    {fieldState.error.message}
+                  </p>
+                )}
+              </FormItem>
+            )}
+          />
+          {/** Subject (dropdown) */}
+          <FormField
+            control={form.control}
+            name="subject"
+            render={({field, fieldState})=>(
+              <FormItem>
+                <FormLabel>Subject</FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger className="w-[464px]">
-                      <SelectValue placeholder="Select a level"/>
+                      <SelectValue placeholder="Select a subject"/>
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {classLevels.map((level)=> (
+                    {classSubjects.map((level)=> (
                       <SelectItem key={level} value={level}>
                         {level}
                       </SelectItem>
@@ -88,15 +100,15 @@ export const ClassForm = (props: ClassFormProps) => {
               </FormItem>
             )}
           />
-          {/** Class Name (textfield) */}
+          {/** Email (textfield) */}
           <FormField
             control={form.control}
-            name="name"
-            render={({field,fieldState})=>(
+            name="email"
+            render={({field, fieldState})=>(
               <FormItem>
-                <FormLabel>Class Name</FormLabel>
+                <FormLabel>Email Address</FormLabel>
                 <FormControl>
-                  <Input className="w-[464px]" placeholder="Class Name" {...field}/>
+                  <Input className="w-[464px]" placeholder="Email address" {...field}/>
                 </FormControl>
                 {fieldState.error && (
                   <p className={clsx("text-red-500 text-sm relative -top-1.5", fieldState.error.message ? "block" : "hidden")}>
@@ -106,36 +118,16 @@ export const ClassForm = (props: ClassFormProps) => {
               </FormItem>
             )}
           />
-          {/** Form Teacher Email (dropdown) */}
+          {/** Contact Number (textfield) */}
           <FormField
             control={form.control}
-            name="teacherEmail"
+            name="contactNumber"
             render={({field, fieldState})=>(
               <FormItem>
-                <FormLabel>Form Teacher</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value} disabled={isTeachersPending}>
-                  <FormControl>
-                    <SelectTrigger className="w-[464px]">
-                      <SelectValue placeholder={isTeachersPending ? <Loader2Icon className="animate-spin"/> : "Assign a form teacher"}/>
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {!isTeachersPending && teachers.length > 0 ? teachers.map((teacher)=> (
-                      <SelectItem key={teacher.email} value={teacher.email}>
-                        {teacher.name}
-                      </SelectItem>
-                    ))
-                      :
-                      <div className="px-4 py-3 text-sm">
-                        No existing teachers.
-                        <br/>
-                        <Link to="/teachers/add" className="text-[#75489F] cursor-pointer font-normal">
-                          Add a teacher
-                        </Link>
-                      </div>
-                    }
-                  </SelectContent>
-                </Select>
+                <FormLabel>Work Contact Number</FormLabel>
+                <FormControl>
+                  <Input className="w-[464px]" placeholder="Work contact number" {...field}/>
+                </FormControl>
                 {fieldState.error && (
                   <p className={clsx("text-red-500 text-sm relative -top-1.5", fieldState.error.message ? "block" : "hidden")}>
                     {fieldState.error.message}
@@ -148,7 +140,7 @@ export const ClassForm = (props: ClassFormProps) => {
         {/** Buttons */}
         <div className="flex flex-row items-center justify-end gap-4">
           <Button variant={"outline"} asChild>
-            <Link to="/classes">
+            <Link to="/teachers">
               <img className="h-4 w-4" src="/arrow-left.svg"/>
               Back
             </Link>
@@ -160,7 +152,7 @@ export const ClassForm = (props: ClassFormProps) => {
                 Submitting...
               </>
               : 
-              "Add Class"
+              "Add Teacher"
             }
           </Button>
         </div>
@@ -169,4 +161,4 @@ export const ClassForm = (props: ClassFormProps) => {
   );
 }
 
-export default ClassForm;
+export default TeachersForm;

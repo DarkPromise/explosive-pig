@@ -4,7 +4,6 @@
     "**/.server/**/*",
     "**/.client/**/*",
     ".react-router/types/**/*",
-    "../shared/types/types.d.ts"
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
@@ -17,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"],
-      "@shared/*": ["../shared/*"],
+      "~/components/*": ["./app/components/*"],
+      "~/shared/*": ["../shared/*"],
     },
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,

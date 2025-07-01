@@ -1,4 +1,4 @@
-import { index, layout, route, type RouteConfig } from "@react-router/dev/routes";
+import { index, route, type RouteConfig } from "@react-router/dev/routes";
 
 export default [
   // Home Page
@@ -8,5 +8,5 @@ export default [
   route("classes/add","routes/classes/add.tsx"),
   // Teacher Route
   route("teachers","routes/teachers/teachers.tsx"),
-  //route("teachers/add","routes/teachers/add.tsx"),
+  route("teachers/add","routes/teachers/add.tsx"),
 ] satisfies RouteConfig;

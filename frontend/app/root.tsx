@@ -1,5 +1,7 @@
-/* eslint-disable react-refresh/only-export-components */
-import {
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import
+{
   isRouteErrorResponse,
   Links,
   Meta,
@@ -12,6 +14,7 @@ import type { Route } from "./+types/root";
 import "./styles/globals.css";
 import Header from './components/header/Header';
 
+
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
@@ -22,10 +25,6 @@ export const links: Route.LinksFunction = () => [
   {
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  },
-  {
-    rel: "stylesheet",
-    href:"https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add"
   }
 ];
 
@@ -50,8 +49,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+const queryClient = new QueryClient();
+
 export default function App() {
-  return <Outlet />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Outlet />
+    </QueryClientProvider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

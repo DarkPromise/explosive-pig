@@ -22,12 +22,15 @@ type Pages = {
   "/teachers": {
     params: {};
   };
+  "/teachers/add": {
+    params: {};
+  };
 };
 
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/classes" | "/classes/add" | "/teachers";
+    page: "/" | "/classes" | "/classes/add" | "/teachers" | "/teachers/add";
   };
   "routes/home.tsx": {
     id: "routes/home";
@@ -44,5 +47,9 @@ type RouteFiles = {
   "routes/teachers/teachers.tsx": {
     id: "routes/teachers/teachers";
     page: "/teachers";
+  };
+  "routes/teachers/add.tsx": {
+    id: "routes/teachers/add";
+    page: "/teachers/add";
   };
 };
